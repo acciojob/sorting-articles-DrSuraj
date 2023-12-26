@@ -1,16 +1,44 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorted Articles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <h1>Sorted Articles</h1>
 
+    <ul id="band"></ul>
+
+    <script>
+        const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+        // Function to strip out "a," "an," and "the" from the beginning of a band name
+        const stripArticles = (bandName) => {
+            const articles = ['a', 'an', 'the'];
+            const words = bandName.split(' ');
+            if (articles.includes(words[0].toLowerCase())) {
+                words.shift();
+            }
+            return words.join(' ');
+        };
+
+        // Sort the bands without considering "a," "an," and "the"
+        const sortedBands = bands.sort((a, b) => stripArticles(a) > stripArticles(b) ? 1 : -1);
+
+        // Display the sorted bands in the HTML
+        const bandList = document.getElementById('band');
+        sortedBands.forEach(band => {
+            const listItem = document.createElement('li');
+            listItem.textContent = stripArticles(band);
+            bandList.appendChild(listItem);
+        });
+    </script>
 </body>
-
 </html>
